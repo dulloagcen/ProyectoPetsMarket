@@ -33,10 +33,10 @@ public class Cliente {
         int counter = 0;
         for (int i = 0; i < clientes.length; i++) {
             if (clientes[i].getNombre().equals("Nombre")) {
-                String nombreC = JOptionPane.showInputDialog("Ingrese el Nombre del cliente");
-                String apellidoC = JOptionPane.showInputDialog("Ingrese el Apellido del cliente");
-                int cedulaC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cédula del cliente"));
-                String emailC = JOptionPane.showInputDialog("Ingrese el correo eléctronico (email) del cliente");
+                String nombreC = JOptionPane.showInputDialog("Ingrese el Nombre del cliente: ");
+                String apellidoC = JOptionPane.showInputDialog("Ingrese el Apellido del cliente: ");
+                int cedulaC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cédula del cliente: "));
+                String emailC = JOptionPane.showInputDialog("Ingrese el correo eléctronico (email) del cliente: ");
                 
                 clientes[i] = new Cliente(nombreC, apellidoC, cedulaC, emailC);
                 
@@ -47,7 +47,7 @@ public class Cliente {
         }
         
         if (counter == clientes.length) {
-            JOptionPane.showMessageDialog(null, "No hay espacios adicionales para agregar más clientes");
+            JOptionPane.showMessageDialog(null, "No hay espacios adicionales para agregar más clientes. ");
         }
         
     }
@@ -74,6 +74,75 @@ public class Cliente {
     
     public void Modificar_Cliente()
     {
+        boolean seguir = true;
+        boolean seguir2 = true;
+        
+        while(seguir)
+        {
+            int contador = 0;
+            int CedulaC = Integer.parseInt(JOptionPane.showInputDialog("Digite la cédula del cliente a modificar"));
+            
+            for(int i=0;i<clientes.length;i++)
+            {
+                if(clientes[i].Cedula == CedulaC)
+                {
+                    while(seguir2)
+                    {
+                       int opc = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el dato que desea modificar: \n"+
+                                                                          "1. Nombre \n"+
+                                                                          "2. Apellidos \n"+
+                                                                          "3. Cédula \n"+
+                                                                          "4. Correo"));
+                       switch(opc)
+                       {
+                           case 1:
+                            String nombre = JOptionPane.showInputDialog("Ingrese el nombre a modificar: ");
+                            clientes[i].Nombre = nombre;
+                              break;
+                           case 2:
+                            String apellidos = JOptionPane.showInputDialog("Ingrese los apellidos: ");
+                            clientes[i].Apellido = apellidos;
+                            break;
+                           case 3:
+                            int cedula = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cédula: "));
+                            clientes[i].Cedula = cedula;
+                            break;
+                            case 4:
+                            String correo = JOptionPane.showInputDialog("Ingrese el correo electronico: ");
+                            clientes[i].Email = correo;
+                            break;
+                            
+                           default:
+                                JOptionPane.showMessageDialog(null, "Seleccione una opción correcta ");
+                                break; 
+                            
+                       }
+                       
+                       int OtroM = JOptionPane.showConfirmDialog(null, "¿Desea modificar más información del Cliente?");
+                       if(OtroM == 1)
+                       {
+                           seguir2 = false;
+                       }
+                    }
+                }
+                else
+                {
+                    ++contador;
+                }
+            }
+            
+            if(contador == clientes.length)
+            {
+               JOptionPane.showMessageDialog(null, "La cédula consultada no pertenece a ningun cliente registrado."); 
+            }
+            
+            int OtroIntento = JOptionPane.showConfirmDialog(null, "¿Desea modificar la información de otro cliente?");
+            if(OtroIntento == 1)
+            {
+                seguir = false;
+            }
+        
+        }
     
     }
     
@@ -146,4 +215,43 @@ public class Cliente {
     public String getEmail() {
         return Email;
     }
+
+
+
+
+    public void MenuCliente(){
+        boolean Seguir = true;
+        int opcMenu;
+
+         while (Seguir == true) {   
+            opcMenu = Integer.parseInt(JOptionPane.showInputDialog("Menú Cliente.\n" + 
+                                                                   "Seleccione la opción deseada:\n" + 
+
+                                                                   "1. Registar Cliente.\n" + 
+                                                                   "2. Consultar Cliente.\n" + 
+                                                                   "3. Modificar Cliente.\n" + 
+                                                                   "4. Menu principal"));
+            switch (opcMenu) {
+                case 1 :
+                    Registrar_Cliente();
+                    break;
+                case 2 :
+                    int idCliente = Integer.parseInt(JOptionPane.showInputDialog(null, "Por favor ingrese la cédula del cliente: "));
+                    Consultar_Cliente(idCliente);
+                    break;
+                case 3 :
+                    Modificar_Cliente();
+                    break;
+                
+                case 4: 
+                    Seguir = false;
+                        break;
+
+                default:
+                    JOptionPane.showMessageDialog(null,"Ingrese una opcion válida.");    
+                    break;
+            }
+         }
+}
+    
 }

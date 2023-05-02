@@ -8,6 +8,7 @@ public class Menu_Principal {
     Ventas misVentas = new Ventas();
     Inventario miInventario = new Inventario();
     
+    
     Cliente misClientes = new Cliente("Nombre", "Apellido", 0, "Email");
     
     public void Menu_Principal() {
@@ -20,7 +21,7 @@ public class Menu_Principal {
             int opc = Integer.parseInt(JOptionPane.showInputDialog(null,"Bienvenido a Pets Market, selecciona una opción \n"+
                                                                       "1. Menú Inventario \n" +
                                                                       "2. Menú Ventas \n" +
-                                                                      "3. Menú Control Usuarios \n" +
+                                                                      "3. Menú Control de Clientes \n" +
                                                                       "4. Salir del Sistema"));
             
             switch(opc) {
@@ -32,7 +33,7 @@ public class Menu_Principal {
                     break;
                     
                 case 3:
-                    //menu usuarios
+                    misClientes.MenuCliente();
                     break;
                 case 4:
                     seguir = false;
@@ -42,5 +43,15 @@ public class Menu_Principal {
                     break;
             }
         }
+    }
+    
+    public void Menu_Principal_Vendedor() {
+        
+        
+        JOptionPane.showInputDialog("Sistema de ventas PetsMarket.");
+        misClientes.inicializarArreglo();
+        miInventario.inicializarInventario();
+        misVentas.menuVentas();
+        
     }
 }

@@ -380,8 +380,7 @@ public class Inventario {
                     + "1. Agregar producto\n"
                     + "2. Mostrar inventario\n"
                     + "3. Buscar producto\n"
-                    + "4. Modificar producto\n"
-                    + "5. Salir"));
+                    + "4. Salir"));
 
             switch (opcion) {
                 case 1:
@@ -394,9 +393,6 @@ public class Inventario {
                     buscarProducto();
                     break;
                 case 4:
-                    //modificarProducto();
-                    break;
-                case 5:
                     continuar = false;
                     break;
                 default:
