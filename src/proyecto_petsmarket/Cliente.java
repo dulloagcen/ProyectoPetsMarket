@@ -1,6 +1,10 @@
 
 package proyecto_petsmarket;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 
@@ -54,6 +58,9 @@ public class Cliente {
         for (int i = 0; i < clientes.length; i++) {
             if (clientes[i].getCedula() == Cedula) {
                 existeCliente = true;
+                JOptionPane.showMessageDialog(null, "¡Cliente existente!"
+                                                    + "\nNombre completo: " + clientes[i].getNombre() + " " + clientes[i].getApellido() 
+                                                    + "\nEmail: " + clientes[i].getEmail());
                 i = clientes.length;
             } else {
                 counter += 1;
@@ -79,6 +86,45 @@ public class Cliente {
         for (int i = 0; i < clientes.length; i++) {
             clientes[i] = new Cliente("Nombre", "Apellido", 0, "Email");
         }
+        
+        FileReader lectorArchivo;
+        try {
+            lectorArchivo = new FileReader("C:\\Users\\pc\\OneDrive\\Documents\\NetBeansProjects\\Proyecto petsmarket V1.0\\Proyecto_PetsMarket\\clientesExistentes.txt");
+        } catch (FileNotFoundException err) {
+            JOptionPane.showMessageDialog(null, "No se encontró el archivo\n" + err);
+            return;
+        }
+
+        BufferedReader textoArchivo;
+        textoArchivo = new BufferedReader(lectorArchivo);
+
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i].Nombre.equals("Nombre")) {
+                String LineaTxt;
+                try {
+                    LineaTxt = textoArchivo.readLine();
+                } catch (IOException err) {
+                    JOptionPane.showMessageDialog(null, err);
+                    return;
+                }
+
+                if (LineaTxt == null) {
+                    break;
+                }
+
+                String Valores[] = LineaTxt.split(";");
+                
+                System.out.println(Arrays.toString(Valores));
+
+                int cedula = Integer.parseInt(Valores[2]);
+                
+                clientes[i] = new Cliente(Valores[0], Valores[1], cedula, Valores[3]);
+            }
+        }
+        
+        
+
+        System.out.println("Clientes existentes cargados correctamente.");
     }
 
     
