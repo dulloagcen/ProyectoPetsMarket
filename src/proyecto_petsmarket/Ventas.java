@@ -70,7 +70,7 @@ public class Ventas {
                 case 4:
                     String listaGranel = miInventarioVenta.listaGranel();
                     int opcGranel = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el producto a granel que desea facturar:\n" + listaGranel));
-                    facturarProducto("Productos a granel", opcGranel);
+                    facturarProducto("GRANEL", opcGranel);
                     
                     otraCompra = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro artículo más al carrito?");
                     if (otraCompra == 1){

@@ -337,7 +337,7 @@ public class Inventario {
         String listaMedicamentos = "Cantidad | Medicamento | Precio\n";
         for(int i=0; i<inventario.length; i++) {
             if(inventario[i].getArea() == Area.MEDICAMENTOS && inventario[i].getCantidad() > 0) {
-                listaMedicamentos += "["+counter+"] " + inventario[i].getCantidad()+" - "+inventario[i].getNombre()+" - C."+inventario[i].getPrecio()+"\n";
+                listaMedicamentos += "["+(i+1)+"] " + inventario[i].getCantidad()+" - "+inventario[i].getNombre()+" - C."+inventario[i].getPrecio()+"\n";
                 counter += 1;
             }
         }
@@ -349,7 +349,7 @@ public class Inventario {
         String listaGranel = "Cantidad (kg) | Tipo Granel | Precio\n";
         for(int i=0; i<inventario.length; i++) {
             if(inventario[i].getArea() == Area.GRANEL && inventario[i].getCantidad() > 0) {
-                listaGranel += "["+counter+"] " + inventario[i].getCantidad()+" - "+inventario[i].getNombre()+" - C."+inventario[i].getPrecio()+"\n";
+                listaGranel += "["+(i+1)+"] " + inventario[i].getCantidad()+" - "+inventario[i].getNombre()+" - C."+inventario[i].getPrecio()+"\n";
                 counter += 1;
             }
         }
@@ -367,9 +367,9 @@ public class Inventario {
                 counter += 1;
             }
         }
-        if(counter == inventario.length) {
+        /*if(counter == inventario.length) {
             JOptionPane.showMessageDialog(null, "No se encontró este producto en inventario.");
-        }
+        }*/
         return producto;
     }
     
