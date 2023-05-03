@@ -18,7 +18,7 @@ public class Ventas {
         
         boolean flag = false;
         
-        int idCliente = Integer.parseInt(JOptionPane.showInputDialog(null, "Antes de proceder con la venta, por favor ingrese la cédula del cliente"));
+        int idCliente = Integer.parseInt(JOptionPane.showInputDialog(null, "Antes de proceder con la venta, por favor ingrese la cédula del cliente: "));
         if (clienteVenta.Consultar_Cliente(idCliente) == true) {
             flag = true;
         } else {
@@ -28,12 +28,12 @@ public class Ventas {
         }
                 
         while (flag) {
-            int opcArea = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione un área para ver los productos respectivos"
-                                                                        + "\n[1] Alimentos"
-                                                                        + "\n[2] Artículos"
-                                                                        + "\n[3] Medicamentos"
-                                                                        + "\n[4] Granel"
-                                                                        + "\n[5] Regresar"));
+            int opcArea = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el area que desea comprar: "
+                                                                        + "\n1. Alimentos"
+                                                                        + "\n2. Artículos"
+                                                                        + "\n3. Medicamentos"
+                                                                        + "\n4. Granel"
+                                                                        + "\n5. Regresar"));
             
             int otraCompra = 0;
             switch (opcArea) {
@@ -58,8 +58,24 @@ public class Ventas {
                     }
                     break;
                 case 3:
+                    String listaMedicamentos = miInventarioVenta.listaMedicamentos();
+                    int opcMedicamento = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el Medicamento que desea facturar:\n" + listaMedicamentos));
+                    facturarProducto("MEDICAMENTOS", opcMedicamento);
+                    
+                    otraCompra = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro artículo más al carrito?");
+                    if (otraCompra == 1){
+                        flag = false;
+                    }
                     break;
                 case 4:
+                    String listaGranel = miInventarioVenta.listaGranel();
+                    int opcGranel = Integer.parseInt(JOptionPane.showInputDialog(null, "Seleccione el producto a granel que desea facturar:\n" + listaGranel));
+                    facturarProducto("Productos a granel", opcGranel);
+                    
+                    otraCompra = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro artículo más al carrito?");
+                    if (otraCompra == 1){
+                        flag = false;
+                    }
                     break;
                 case 5:
                     flag = false;
